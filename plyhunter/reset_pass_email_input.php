@@ -47,7 +47,7 @@
   <section class="masthead">
    <div class="row">
    <div class="col-md-8 offset-md-4">
-   <div class="col-md-6  yellowBg signIn">
+   <div class="col-md-4  yellowBg signIn">
     <form method="post" action="send_link.php">
       <p>Enter Email Address To Send Password Link</p>
       <div class="form-group">
