@@ -15,16 +15,19 @@ if (isset($_POST['signin'])) {
             $spassword = stripslashes($spassword);
             $semail = mysqli_real_escape_string($connection,$semail);
             $spassword = mysqli_real_escape_string($connection,$spassword);
+            $spassword=md5($spassword);
             // SQL query to fetch information of registerd users and finds user match.
-            $query ="select * from user where password='$spassword' AND emailID='$semail'";
+            $query ="select fname,password from user where emailID='$semail'";
             $result=mysqli_query($connection,$query);
             $rowcount=mysqli_num_rows($result);
+            $row=mysqli_fetch_array($result);
 
-                            if ($rowcount==1) {
-                            $_SESSION['login_user']=$username; // Initializing Session
-                            header("location: home.php"); // Redirecting To Other Page
+                            if ($rowcount==1 && $row['password']==$spassword) {
+                            $_SESSION['login_user']=$semail; // Initializing Session
+                            $_SESSION['fname']=$row['fname'];
+                            header("location: welcome.php"); // Redirecting To Other Page
                             } else {
-                            $error_user_pass = "Username or Password is invalid";
+                            $error_user_pass = "Invalid EmailID or Password!";
                             }
     
 mysqli_close($connection); // Closing Connection
@@ -73,15 +76,15 @@ $result=mysqli_query($connection,$existingAccountCheck);
     
 $email = mysqli_real_escape_string($connection,$email);
 $password = mysqli_real_escape_string($connection,$password);
-$Password=md5($password);
+$Pass=md5($password);
 
-  $query ="insert into user (fname,lname,emailID,password,dob,gender) values('$fname','$lname','$email','$password','$dob','$gender')";
+  $query ="insert into user (fname,lname,emailID,password,dob,gender) values('$fname','$lname','$email','$Pass','$dob','$gender')";
     
     $result=mysqli_query($connection,$query);
     
     if($result){
         
-        header("location: home.php");
+        header("location: welcome.php");
     }
     
     

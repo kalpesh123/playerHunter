@@ -2,7 +2,7 @@
 include('login.php'); // Includes Login Script
 
 if(isset($_SESSION['login_user'])){
-header("location: home.php");
+header("location: welcome.php");
 }
 ?>
 <!DOCTYPE html>
@@ -82,7 +82,7 @@ header("location: home.php");
                       <span><?php echo $error_user_pass; ?></span>
                       <button type="submit" name="signin", value="Sign In" class="btn btn-primary">SignIn</button>
                       <br>
-                      <a href="reset_pass_email_input.php">Forgot Password</a>
+                      <a href="reset_pass.php">Forgot Password</a>
                     </form>
                     <hr>
                     <h5>OR Login With</h5>
@@ -111,7 +111,7 @@ header("location: home.php");
                     </div>
                     
                     <div class="form-group">
-                      <input class="form-control" name="password" id="password" type="password" placeholder="Password *" required="required" data-validation-required-message="Please enter your passworf.">
+                      <input class="form-control" name="password" id="password" type="password" placeholder="Password *" required="required" data-validation-required-message="Please enter your password.">
                       <p class="help-block text-danger"></p>
                     </div>
                     <div class="form-group">
